@@ -148,7 +148,16 @@
         <nav id="TableOfContents">
   <ul>
     <li><a href="#使用github的好处">使用github的好处</a></li>
-    <li><a href="#github的使用流程">github的使用流程</a></li>
+    <li><a href="#github认证功能">github认证功能</a></li>
+    <li><a href="#github的本地仓库创建">github的本地仓库创建。</a></li>
+    <li><a href="#github本地仓库与远程仓库连接">github本地仓库与远程仓库连接</a></li>
+    <li><a href="#github的使用步骤">github的使用步骤</a>
+      <ul>
+        <li><a href="#clone远程仓库中的代码">clone远程仓库中的代码</a></li>
+        <li><a href="#本地代码修改后提交到远程仓库">本地代码修改后提交到远程仓库</a></li>
+        <li><a href="#heading"></a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
     </div>
@@ -204,12 +213,52 @@
 <li>版本控制。如果程序需要改写，可以直接回溯代码到没有添加需求的时间段。</li>
 <li>分工合作集成管理。</li>
 </ol>
-<h2 id="github的使用流程">github的使用流程</h2>
+<h2 id="github认证功能">github认证功能</h2>
+<p>描述： 你们想过没有，为什么每次github上传代码不需要认证呢？如果不认证的话岂不是每个人只要知道了你的github上远程仓库的地址。那么每个人都是可以修改你们的代码的。</p>
+<ul>
+<li>SSH认证</li>
+<li>Https认证</li>
+</ul>
+<h2 id="github的本地仓库创建">github的本地仓库创建。</h2>
+<p>本地仓库相当于本地代码副本</p>
 <ol>
 <li>git init，初始化git仓库。</li>
-<li>git add filename，将文件添加至本地仓库。</li>
-<li>git commit -m &ldquo;commmit decription&rdquo;，将本地仓库中改动了的代码提交至暂存空间。</li>
+<li>touch README.md，创建程序具体操作、功能的描述文件。
+<ul>
+<li>这是一个markdown文件，专门用于项目介绍。</li>
+</ul>
+</li>
+<li>git add filename，将文件添加至本地仓库。
+<ul>
+<li>‘.’：表示所有文件</li>
+</ul>
+</li>
+<li>git commit -m &ldquo;commmit description&rdquo;，将本地仓库中改动了的代码提交至暂存空间，并添加描述。</li>
 </ol>
+<h2 id="github本地仓库与远程仓库连接">github本地仓库与远程仓库连接</h2>
+<p>远程仓库相当于远处代码的副本，这样即使本地仓库坏了，如果我有远程仓库的地址一样可以恢复代码。</p>
+<ol>
+<li>git remote add origin <a href="mailto:git@github.com">git@github.com</a>:&lt;&quot;你的github账户名称&quot;&gt;/&lt;&quot;连接的远程仓库名称&quot;&gt;.git 。 将本地仓库与github上的某个远程仓库连接对应。
+<ul>
+<li>本地仓库没有与github远程仓库连接才调用。 而且只需要调用一次即可永久连接上github上的远程仓库。</li>
+</ul>
+</li>
+<li>git push -u origin master 将本地的master分支推送到origin主机，同时指定origin为默认主机，后面就可以不加任何参数使用git push了。
+注意：
+只有创建本地仓库才可以与远程仓库连接。
+详细信息如下图： =================此处需要代码截图===================</li>
+</ol>
+<h2 id="github的使用步骤">github的使用步骤</h2>
+<h3 id="clone远程仓库中的代码">clone远程仓库中的代码</h3>
+<p>描述： 实际开发中很多时候程序员都是半途接手别人的代码，而公司代码一般都使用 github、华为云、码云等远程终端存放代码。那么我们是需要将远程终端的代码 clone（下载） 下来的。</p>
+<h3 id="本地代码修改后提交到远程仓库">本地代码修改后提交到远程仓库</h3>
+<pre><code class="language-git" data-lang="git">前提：本地仓库与远程仓库已经连接对应上。
+1. git add filename :将修改了代码的文件添加至本地仓库保存，没有改动过的代码不能添加。
+2. git commit -m &quot;commit description&quot;：将本地仓库代码上传至暂存空间。 github上传到远程仓库的代码并不是直接上传本地仓库的代码。而是将本地仓库代码上传至一个“暂存空间”，再从暂存空间提交被修改了的代码到远程仓库。 因此你没有commit 是不能成功提交代码到远程仓库的。
+3. git push：将“暂存空间”中的代码提交到远程仓库。
+描述：至此才算完成了github一个简单的提交代码流程。
+</code></pre><p>标题大总结：一个完整的、基本的github流程就走完了。如果遇到其他问题根据实际情况搜索解决就好。</p>
+<h3 id="heading"></h3>
 
         </div>
 
