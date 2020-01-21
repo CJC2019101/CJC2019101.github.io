@@ -153,11 +153,10 @@
     <li><a href="#github本地仓库与远程仓库连接">github本地仓库与远程仓库连接</a></li>
     <li><a href="#github的使用步骤">github的使用步骤</a>
       <ul>
-        <li><a href="#clone远程仓库中的代码">clone远程仓库中的代码</a></li>
-        <li><a href="#本地代码修改后提交到远程仓库">本地代码修改后提交到远程仓库</a></li>
-        <li><a href="#heading"></a></li>
+        <li></li>
       </ul>
     </li>
+    <li><a href="#github高级操作">github高级操作</a></li>
   </ul>
 </nav>
     </div>
@@ -214,10 +213,13 @@
 <li>分工合作集成管理。</li>
 </ol>
 <h2 id="github认证功能">github认证功能</h2>
-<p>描述： 你们想过没有，为什么每次github上传代码不需要认证呢？如果不认证的话岂不是每个人只要知道了你的github上远程仓库的地址。那么每个人都是可以修改你们的代码的。</p>
+<p>描述： 你想过没有，为什么每次github上传代码不需要认证呢？如果不认证的话岂不是每个人只要知道了你的github上远程仓库的地址。那么每个人都可以修改你的代码。</p>
 <ul>
-<li>SSH认证</li>
-<li>Https认证</li>
+<li>SSH认证<br>
+认证过程（个人理解）：SSH认证需要两个钥匙，一个是公钥存放放在github上，另一个是私钥存放在本地电脑上，且一个电脑只能有一个私钥。  本地仓库上传代码私钥加密，github公钥解密。</li>
+<li>Https认证<br>
+https就是每次提交代码的时候都需要输入账户名称和密码。 不推荐使用！博主自己没有测试过！</li>
+<li>注意：这里纯粹是自己为了理解记忆，描述不清极有可能错误。不影响操作！</li>
 </ul>
 <h2 id="github的本地仓库创建">github的本地仓库创建。</h2>
 <p>本地仓库相当于本地代码副本</p>
@@ -243,23 +245,50 @@
 <li>本地仓库没有与github远程仓库连接才调用。 而且只需要调用一次即可永久连接上github上的远程仓库。</li>
 </ul>
 </li>
-<li>git push -u origin master 将本地的master分支推送到origin主机，同时指定origin为默认主机，后面就可以不加任何参数使用git push了。
+<li>git push -u origin master 将本地的master分支推送到origin主机，同时指定origin为默认主机，后面就可以不加任何参数使用git push了。<br>
 注意：
-只有创建本地仓库才可以与远程仓库连接。
-详细信息如下图： =================此处需要代码截图===================</li>
+<ul>
+<li>只有创建本地仓库才可以与远程仓库连接。</li>
+<li>由于是第一次连接远程仓库，所以我们还需要认证方式。<br>
+选择方式：点击图中的标记处， 选中后连接远程仓库的代码会自动改变，复制即可。
+详细信息如下图：<br>
+<img src="images%5CloaclConnectFarRepo.png" alt="github本地仓库连接远程仓库"></li>
+</ul>
+</li>
 </ol>
 <h2 id="github的使用步骤">github的使用步骤</h2>
-<h3 id="clone远程仓库中的代码">clone远程仓库中的代码</h3>
+<h4 id="1clone远程仓库中的代码">1.clone远程仓库中的代码</h4>
 <p>描述： 实际开发中很多时候程序员都是半途接手别人的代码，而公司代码一般都使用 github、华为云、码云等远程终端存放代码。那么我们是需要将远程终端的代码 clone（下载） 下来的。</p>
-<h3 id="本地代码修改后提交到远程仓库">本地代码修改后提交到远程仓库</h3>
-<pre><code class="language-git" data-lang="git">前提：本地仓库与远程仓库已经连接对应上。
-1. git add filename :将修改了代码的文件添加至本地仓库保存，没有改动过的代码不能添加。
+<pre><code>git clone &lt;远程仓库url地址&gt; ：下载代码，推荐使用SSH方式。
+</code></pre><h4 id="2本地代码修改后提交到远程仓库">2.本地代码修改后提交到远程仓库</h4>
+<p>前提：本地仓库与远程仓库已经连接对应上。</p>
+<pre><code class="language-git" data-lang="git">1. git add filename :将修改了代码的文件添加至本地仓库保存，没有改动过的代码不能添加。
 2. git commit -m &quot;commit description&quot;：将本地仓库代码上传至暂存空间。 github上传到远程仓库的代码并不是直接上传本地仓库的代码。而是将本地仓库代码上传至一个“暂存空间”，再从暂存空间提交被修改了的代码到远程仓库。 因此你没有commit 是不能成功提交代码到远程仓库的。
 3. git push：将“暂存空间”中的代码提交到远程仓库。
 描述：至此才算完成了github一个简单的提交代码流程。
-</code></pre><p>标题大总结：一个完整的、基本的github流程就走完了。如果遇到其他问题根据实际情况搜索解决就好。</p>
-<h3 id="heading"></h3>
-
+</code></pre><p>一个完整的、基本的github流程就走完了。如果遇到其他问题根据实际情况搜索解决就好。</p>
+<h2 id="github高级操作">github高级操作</h2>
+<ul>
+<li>命令简写<br>
+运行以下命令即可</li>
+</ul>
+<pre><code class="language-gitbash" data-lang="gitbash">touch ~/ . bashrc：创建命令行配置文件
+echo 'alias ga = &quot;git add&quot;'&gt;&gt; ~/ . bashrc ：流的重定向，将“ alias ga = &quot;git add&quot; ”追加到命令行配置文件中。 将“ git add ” alias（重命名）为 ga。这样ga就等价于git add 命令，但是不影响git add命令的使用。 以下同理。
+echo 'alias gc=&quot;git commit&quot;'&gt;&gt; ~/ . bashrc 
+echo 'alias gl=&quot;git pull&quot;'&gt;&gt; ~/ . bashrc
+echo 'alias gp=&quot; git push&quot;'&gt;&gt; ~/ . bashrc
+echo 'alias gco=&quot; git checkout&quot;'&gt;&gt; ~/ . bashrc ：切换分支
+echo 'alias gst=&quot;git status -sb&quot;'&gt;&gt; ~/ . bashrc ：展示暂存空间与本地仓库工作状态详细
+source ~/.bashrc ：运行命令行配置文件使配置生效
+</code></pre><ul>
+<li>其他实用命令</li>
+</ul>
+<pre><code class="language-gitbash" data-lang="gitbash">git branch X : 创建分支X，直接输入git branch显示所有分支。
+git checkout X ：切换分支X。
+git merge X：整合X分支。
+git status -sb : 简介展示本地仓库与暂存空间工作状态信息。
+git clone &lt;远程仓库url地址&gt; ：下载代码，推荐使用SSH认证方式下载代码。
+</code></pre>
         </div>
 
         
