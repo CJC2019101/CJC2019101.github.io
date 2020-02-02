@@ -6,10 +6,19 @@
     <description>Recent content in Posts on 阿飞</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 20 Jan 2020 17:27:26 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 02 Feb 2020 23:41:07 +0800</lastBuildDate>
     
 	<atom:link href="https://CJC2019101.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>20200202</title>
+      <link>https://CJC2019101.github.io/post/20200202/</link>
+      <pubDate>Sun, 02 Feb 2020 23:41:07 +0800</pubDate>
+      
+      <guid>https://CJC2019101.github.io/post/20200202/</guid>
+      <description>2020年02月02日多多少少有些特殊，作为一名程序猿我不希望自己成为手机里的只会敲代码的机器人。所以写一篇博客记录一下这个特别、美好的一天。 今天工作体会 程序猿的我很悲催，现在疫情当前很多亲戚朋友都在家躲避“新型冠状病毒”。而我接到通知在家办公.......。在家办公真的紧张、慌</description>
+    </item>
     
     <item>
       <title>Github常用命令</title>
