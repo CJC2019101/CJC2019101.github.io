@@ -6,10 +6,19 @@
     <description>Recent content in Posts on 阿飞</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 02 Feb 2020 23:41:07 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 03 Feb 2020 09:31:26 +0800</lastBuildDate>
     
 	<atom:link href="https://CJC2019101.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>使用postman进行登录测试</title>
+      <link>https://CJC2019101.github.io/post/%E4%BD%BF%E7%94%A8postman%E8%BF%9B%E8%A1%8C%E7%99%BB%E5%BD%95%E6%B5%8B%E8%AF%95/</link>
+      <pubDate>Mon, 03 Feb 2020 09:31:26 +0800</pubDate>
+      
+      <guid>https://CJC2019101.github.io/post/%E4%BD%BF%E7%94%A8postman%E8%BF%9B%E8%A1%8C%E7%99%BB%E5%BD%95%E6%B5%8B%E8%AF%95/</guid>
+      <description>访问登录URL获取jwt 1、 添加环境变量jwt，为了可以访问需要登录的URL我们需要在请求头中存放有效的jwt。 2、 添加如下代码 ：如果成功获取jwt会在控制台打印 “Your test name” pm.test(&amp;quot;Your test name&amp;quot;, function(){ var jsonData = pm.response.json(); console.log(jsonData.jwt) pm.environment.set(&amp;quot;jwt&amp;quot;,jsonData.jwt); }); 3、 获取登录URL，访问登录成功获取jwt。 4、 获取需要登陆才能访问的UR</description>
+    </item>
     
     <item>
       <title>20200202</title>
