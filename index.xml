@@ -6,10 +6,19 @@
     <description>Recent content on 阿飞</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 03 Feb 2020 09:31:26 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 05 Feb 2020 22:01:56 +0800</lastBuildDate>
     
 	<atom:link href="https://CJC2019101.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Maven</title>
+      <link>https://CJC2019101.github.io/post/Maven/</link>
+      <pubDate>Wed, 05 Feb 2020 22:01:56 +0800</pubDate>
+      
+      <guid>https://CJC2019101.github.io/post/Maven/</guid>
+      <description>Maven存在的原因 以前编写项目需要导入其他人编写的jar包时都是自己手动一个一个的拖到一个文件夹下。而Maven的pom.xml文件就很好的解决了这个问题。 jar包实质就是一个“.zip”类型的压缩文件，我们可以将其修改为.zip文件解压。打开解压后的文件夹我们可以发现jar文</description>
+    </item>
     
     <item>
       <title>使用postman进行登录测试</title>
