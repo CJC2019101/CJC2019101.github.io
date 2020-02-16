@@ -6,10 +6,19 @@
     <description>Recent content in Posts on 阿飞</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 05 Feb 2020 22:01:56 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 16 Feb 2020 10:41:39 +0800</lastBuildDate>
     
 	<atom:link href="https://CJC2019101.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Collection体系的使用</title>
+      <link>https://CJC2019101.github.io/post/Collection%E4%BD%93%E7%B3%BB/</link>
+      <pubDate>Sun, 16 Feb 2020 10:41:39 +0800</pubDate>
+      
+      <guid>https://CJC2019101.github.io/post/Collection%E4%BD%93%E7%B3%BB/</guid>
+      <description>Collection Collection是Java所有集合类的父类。 常见的有：List、Set、Map、Tree。 常用方法： retailAll(Collectiont); 取两个集合的交集。 contains(T t); 是否包含某个值。 对应的工具类：Collections 常用方法： 1. csort(Collectiont); 对实现了Comparable接口的集合元素排序，默认是升序。 2. reverse(Collectiont); 对集合逆序排列。如：</description>
+    </item>
     
     <item>
       <title>Maven</title>
