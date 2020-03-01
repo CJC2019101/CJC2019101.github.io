@@ -244,11 +244,11 @@ Collection的方法ArrayList也有。</li>
 <a href="https://imgchr.com/i/3p7wPH"><img src="https://s2.ax1x.com/2020/02/16/3p7wPH.png" alt="3p7wPH.png"></a>
  2. 常用方法：<br>
   new HashSet(Collection<!-- raw HTML omitted --> t); 可以将Collection的子类直接转换为Set集合，且去掉Collection集合中重复的元素只保留一个。<br>
- 通过查看源码发现HashSet本质就是HashMap的‘key’,他们的Iterator(迭代器)是同一个。
+ 通过查看源码发现HashSet本质就是HashMap的‘key’,他们的Iterator(迭代器)是同一个。<br>
   如图：<br>
 <a href="https://imgchr.com/i/3p7NVO"><img src="https://s2.ax1x.com/2020/02/16/3p7NVO.png" alt="3p7NVO.png"></a><br>
 <a href="https://imgchr.com/i/3p7aIe"><img src="https://s2.ax1x.com/2020/02/16/3p7aIe.png" alt="3p7aIe.png"></a><br>
- <!-- raw HTML omitted -->因此这里需要额外的注意，如果通过的Map.keySet();获取的set集合，如果改变Map的key也会跟着改变。 Map.values()方法返回Map的值集合，以Collection<!-- raw HTML omitted --> 的形式返回，他的Iterator也是和Map Value的Iterator相同，如果添加或删除也是会直接影响Map的值 <!-- raw HTML omitted --> <br>
+<!-- raw HTML omitted --> 因此这里需要额外的注意，如果通过的Map.keySet();获取的set集合，如果改变Map的key也会跟着改变。 Map.values()方法返回Map的值集合，以Collection<!-- raw HTML omitted --> 的形式返回，他的Iterator也是和Map Value的Iterator相同，如果添加或删除也是会直接影响Map的值 <!-- raw HTML omitted --> <br>
   如图：<br>
 <a href="https://imgchr.com/i/3p7YqK"><img src="https://s2.ax1x.com/2020/02/16/3p7YqK.png" alt="3p7YqK.png"></a><br>
  3. Iterator扩展：<br>
@@ -271,7 +271,7 @@ Collection的方法ArrayList也有。</li>
  常用方法：<br>
   * keySet(); 返回Map集合的key以Set集合的形式返回map的key。<br>
   * values(); 返回Map集合的值以Collection的形式返回map的value。<br>
-  <!-- raw HTML omitted -->如果修改keySet()、values()方法的返回值会直接影响HasdMap集合的数据。因为他们的Iterator和Map的Iterator是同一个。<!-- raw HTML omitted --><br>
+<!-- raw HTML omitted -->  如果修改keySet()、values()方法的返回值会直接影响HasdMap集合的数据。因为他们的Iterator和Map的Iterator是同一个。<!-- raw HTML omitted --><br>
  源码分析：<br>
   <a href="https://imgchr.com/i/3p7GKx"><img src="https://s2.ax1x.com/2020/02/16/3p7GKx.png" alt="3p7GKx.png"></a>
   <a href="https://imgchr.com/i/3p7UaD"><img src="https://s2.ax1x.com/2020/02/16/3p7UaD.png" alt="3p7UaD.png"></a></p>
@@ -368,6 +368,10 @@ Collection的方法ArrayList也有。</li>
     <section class="widget">
         <h3 class="widget-title">最近文章</h3>
 <ul class="widget-list">
+    
+    <li>
+        <a href="https://CJC2019101.github.io/post/Cmder%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/" title="Cmder的安装与配置">Cmder的安装与配置</a>
+    </li>
     
     <li>
         <a href="https://CJC2019101.github.io/post/Collection%E4%BD%93%E7%B3%BB/" title="Collection体系的使用">Collection体系的使用</a>
