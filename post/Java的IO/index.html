@@ -6,20 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Web小知识 | 阿飞</title>
-    <meta property="og:title" content="Web小知识 - 阿飞">
+    <title>Java的IO | 阿飞</title>
+    <meta property="og:title" content="Java的IO - 阿飞">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content='2020-03-08T20:41:25&#43;08:00'>
+    <meta property="article:published_time" content='2020-03-09T07:53:39&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2020-03-08T20:41:25&#43;08:00'>
+    <meta property="article:modified_time" content='2020-03-09T07:53:39&#43;08:00'>
         
     <meta name="Keywords" content="java">
-    <meta name="description" content="Web小知识">
+    <meta name="description" content="Java的IO">
         
     <meta name="author" content="阿飞">
-    <meta property="og:url" content="https://CJC2019101.github.io/post/web%E5%B0%8F%E7%9F%A5%E8%AF%86/">
+    <meta property="og:url" content="https://CJC2019101.github.io/post/Java%E7%9A%84IO/">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
@@ -147,15 +147,10 @@
     <div class="post-toc-content">
         <nav id="TableOfContents">
   <ul>
-    <li>
-      <ul>
-        <li><a href="#http-erro-code分类">Http Erro Code分类</a></li>
-        <li><a href="#简单的识别爬虫">简单的识别爬虫</a></li>
-        <li><a href="#站在巨人的肩膀上学习不要在想着再发明轮子">站在巨人的肩膀上学习，不要在想着再发明轮子。</a></li>
-        <li><a href="#java爬虫">Java爬虫：</a></li>
-        <li><a href="#爬虫步骤">爬虫步骤：</a></li>
-      </ul>
-    </li>
+    <li><a href="#一计算机组成原理常识">一、计算机组成原理常识：</a></li>
+    <li><a href="#二io的来源">二、IO的来源：</a></li>
+    <li><a href="#三降低cpu与的运行速度与内存硬盘不匹配问题">三、降低cpu与的运行速度与内存、硬盘不匹配问题：</a></li>
+    <li><a href="#四不要重复造轮子">四、不要重复造轮子</a></li>
   </ul>
 </nav>
     </div>
@@ -189,10 +184,10 @@
 </script>
     <article class="post">
         <header>
-            <h1 class="post-title">Web小知识</h1>
+            <h1 class="post-title">Java的IO</h1>
         </header>
         <date class="post-meta meta-date">
-            2020年3月8日
+            2020年3月9日
         </date>
         
         
@@ -203,27 +198,61 @@
         
         
         <div class="post-content">
-            <h3 id="http-erro-code分类">Http Erro Code分类</h3>
+            <h2 id="一计算机组成原理常识">一、计算机组成原理常识：</h2>
 <ul>
-<li>2XX：表示状态成功。</li>
-<li>4XX：客户端错误。</li>
-<li>5XX：服务器端错误。</li>
+<li>推荐文章《CPU：这个世界慢！死！了！》，<strong>观后感编写代码要尽量减少程序的IO操作</strong>。</li>
 </ul>
-<h3 id="简单的识别爬虫">简单的识别爬虫</h3>
-<p> User-Agent：用户代理，其实我们的浏览器就是一个用户代理，当我使用浏览器发送请求时，我们的请求头里都会有 User-Agent （用户代理）这个提示信息。<!-- raw HTML omitted -->我们可以通过这个可以简单的识别&quot;Http请求&quot;是浏览器发送的还是其他程序发送的，但这仅仅是针对哪些一点都不会&quot;Http请求&quot;伪装的小白。<!-- raw HTML omitted --></p>
-<h3 id="站在巨人的肩膀上学习不要在想着再发明轮子">站在巨人的肩膀上学习，不要在想着再发明轮子。</h3>
-<p> 当我们面临一个问题的时候应该多思考上网搜索，网上肯定已经有人解决了而且别人的代码很简洁规范技术先进。可能大家觉得百度的浏览器搜素的答案也不怎么样，推荐：<a href="https://stackoverflow.com/">Stack Overflow</a>，这是一个IT人员的论坛，可以免费的提问而且答案的技术新颖、靠谱。</p>
-<h3 id="java爬虫">Java爬虫：</h3>
-<p> 浏览器可以做的事情，其他程序肯定也是可以的。因为大家都是代码写成的。 如：发送http请求、下载文件&hellip;.等。</p>
-<h3 id="爬虫步骤">爬虫步骤：</h3>
-<p> Step one： 发送http请求。<br>
- Step two：解析响应的数据。<br>
-  知识补充：HTML是高度结构化树形结构语言。 如：先有head再有body再有div，div还可以嵌套div就像一颗树一样。<br>
-  注意：<br>
-   1. 写爬虫肯定会遇到很多新东西，我们不能看别人的文章做事。得看官方文档保证技术新颖没有被淘汰。<br>
-   2. 网页搜索信息时，要简洁精炼准确。
-如：搜索Fira Code 字体下载，  直接搜索Fira Code github。 搜索某个Maven仓库 XXXXX（依赖包名） Maven。</p>
-<h4 id="font-color--red上面如有错误还望各位网友指出改正谢谢观看font"><!-- raw HTML omitted -->上面如有错误还望各位网友指出改正谢谢观看<!-- raw HTML omitted --></h4>
+<ol>
+<li>CPU： 计算机进行运算的地方，也可以说电脑执行指令的地方。 运算速度是最快的，快到什么程度你看了《CPU：这个世界慢死了！》就知道快的是多夸张了。 当然价格也是最贵的这也是电脑为什么内存、硬盘不能都用CPU来存放的原因。</li>
+<li>内存： cpu运算数据、运算结果存放的地方。 容量小，断电丢失。</li>
+<li>硬盘： 存放“永久数据”（文件、图片、音频、视频）的地方。 容量大，断电不丢失。</li>
+<li>他们之间的关系： cpu是核心，内存是cpu的工作空间，硬盘存放内存工作空间结果数据的仓库，也可以存起他杂物数据。</li>
+</ol>
+<h2 id="二io的来源">二、IO的来源：</h2>
+<ol>
+<li>文件的本质：<br>
+  一切的文件都是字节流。包括二进制文件、音频文件、文本文件、Html文件&hellip;等等。<br>
+  字节流：一段一段的字节（8Byte）的组成。之所以叫字节流是因为程序读取文件本质是读取的字节，当程序读取文件（.mp4、.word）时字节就像一条河流一样流进程序里面，故有字节流一说。<br>
+  对字节流的操作简称为IO（Input Output）。
+<img src="https://s2.ax1x.com/2020/03/09/8SmQCq.png" alt="8SmQCq.png"><br>
+<img src="https://s2.ax1x.com/2020/03/09/8Sml80.png" alt="8Sml80.png"></li>
+<li>为什么程序读取相同字节流显示的内容与形式也不同：<br>
+  2.1 字节流的显示输出由程序决定怎么解释。 通用的方式就是通过码表找对应的“字符”显示，常见的有ASCII码表。<br>
+    （1）编码：字节转换成字符。 Reader读取字符，找码表。增强代码可读性，实际项目开发时也应该减少硬编码的使用多使用变量、枚举封装。<br>
+<a href="https://imgchr.com/i/8SmGKU"><img src="https://s2.ax1x.com/2020/03/09/8SmGKU.png" alt="8SmGKU.png"></a><br>
+    （2）解码：字符转换成字节。 InputStream读取字节找码表。   I/O操作的时候就是 编码与解码的过程。<br>
+    （3）编码与解码要求规则一致，编码与解码的过程中使用同一个码表，找不到就乱码。<br>
+      如： 16进制数0x70其本质就是一个01110000但是显示的方式有许多种。<br>
+<img src="https://s2.ax1x.com/2020/03/09/8SmJrF.png" alt="8SmJrF.png">
+  2.2 乱码的原因：<br>
+    （1）乱码俗称黑洞，将一切无法识别的字节用同一个字符表示因而无法识别的字节就丢失了。<br>
+    （2）该程序的码表没有该字节码对应的字符。如：一个16进制文件使用2进制程序打开。 16进制四个字节读作一个字符，二进制是一个字节读作一个字符。用二进制的方式读取16进制文件肯定会出现一部分的乱码的。然而程序要正常运行文件肯定不能有乱码的。<br>
+  2.3 程序常用16进制的原因：<br>
+    （1）如：0x70(H) &mdash;&ndash;&gt; 01110000(B)，仔细比较的话可以看出16进制转2进制特别的简单，直接将每个16进制数转换成2进制数拼接即可。<br>
+    （2）补充一个小知识：0x开头是16进制，8进制必须是0开头，十进制和二进制没有前缀约束。<br>
+  2.4 Java File类的本质<br>
+    File file =new File(&ldquo;d:test.txt&rdquo;) file并不是一个文件对象，而是 文件路径的封装，不确定可自行查看源码描述。<br>
+<img src="https://s2.ax1x.com/2020/03/09/8Sm3vT.png" alt="8Sm3vT.png"></li>
+</ol>
+<h2 id="三降低cpu与的运行速度与内存硬盘不匹配问题">三、降低cpu与的运行速度与内存、硬盘不匹配问题：</h2>
+<p>  前面提到过cpu的运行速度与内存、硬盘相比是很快的。</p>
+<ol>
+<li>经典的IO模型：<br>
+    优点：<br>
+      易于理解，方便抽象。<br>
+    缺点：<br>
+      速度慢效率低。 一个一个的读取字节发送给cpu编码、解码、运算&hellip;..。站在CPU的角度试想一下有一个人和你聊天说一个字停很久说一个字停很久而且你必须听他说完（因为字节流是连续的字节组成中间断开会造成很多问题，如：TCP协议）。<br>
+<a href="https://imgchr.com/i/8SMDFH"><img src="https://s2.ax1x.com/2020/03/09/8SMDFH.png" alt="8SMDFH.png"></a></li>
+<li>解决方式：<br>
+    （1）：BufferReader.readLine()；   将读取的字节存储在缓冲区中，直到缓存区满了或者读到文件末尾才将缓冲区的内容发送给CPU提高运行效率。<br>
+    （2）：并发（多线程）<br>
+    （3）NIO（New Input Output）：新的IO，以“块”传递数据，但是块与块之间无序。</li>
+</ol>
+<h2 id="四不要重复造轮子">四、不要重复造轮子</h2>
+<ol>
+<li>我们做之前要好好想一下这个需求、方法实现是否网上已经有了。其实大多数的方法实现都是有的，我们就没必要再发明造轮子了网上的肯定有比你写的好的代码。</li>
+<li>推荐网站： <a href="https://stackoverflow.com/">Stack Overflow</a>这是一个免费的IT程序员问答网站，很多问题都有解决方案且技术很前卫。</li>
+</ol>
 
         </div>
 
@@ -231,7 +260,7 @@
 <div class="post-archive">
     <ul class="post-copyright">
         <li><strong>原文作者：</strong><a rel="author" href="https://CJC2019101.github.io/">阿飞</a></li>
-        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://CJC2019101.github.io/post/web%E5%B0%8F%E7%9F%A5%E8%AF%86/">https://CJC2019101.github.io/post/web%E5%B0%8F%E7%9F%A5%E8%AF%86/</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://CJC2019101.github.io/post/Java%E7%9A%84IO/">https://CJC2019101.github.io/post/Java%E7%9A%84IO/</a></li>
         <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
     </ul>
 </div>
@@ -245,6 +274,8 @@
     <h2>See Also</h2>
     <ul class="listing">
         
+        <li><a href="/post/web%E5%B0%8F%E7%9F%A5%E8%AF%86/">Web小知识</a></li>
+        
         <li><a href="/post/Cmder%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/">Cmder的安装与配置</a></li>
         
         <li><a href="/post/Collection%E4%BD%93%E7%B3%BB/">Collection体系的使用</a></li>
@@ -252,8 +283,6 @@
         <li><a href="/post/Maven/">Maven</a></li>
         
         <li><a href="/post/%E4%BD%BF%E7%94%A8postman%E8%BF%9B%E8%A1%8C%E7%99%BB%E5%BD%95%E6%B5%8B%E8%AF%95/">使用postman进行登录测试</a></li>
-        
-        <li><a href="/post/20200202/">20200202</a></li>
         
     </ul>
 </div>

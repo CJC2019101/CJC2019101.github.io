@@ -6,10 +6,19 @@
     <description>Recent content in Posts on 阿飞</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 08 Mar 2020 20:41:25 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 09 Mar 2020 07:53:39 +0800</lastBuildDate>
     
 	<atom:link href="https://CJC2019101.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Java的IO</title>
+      <link>https://CJC2019101.github.io/post/Java%E7%9A%84IO/</link>
+      <pubDate>Mon, 09 Mar 2020 07:53:39 +0800</pubDate>
+      
+      <guid>https://CJC2019101.github.io/post/Java%E7%9A%84IO/</guid>
+      <description>一、计算机组成原理常识： 推荐文章《CPU：这个世界慢！死！了！》，观后感编写代码要尽量减少程序的IO操作。 CPU： 计算机进行运算的地方，也可以说电脑执行指令的地方。 运算速度是最快的，快到什么程度你看了《CPU：这个世界慢死了！》就知道快的是多夸张了。 当然价格也是最贵的这也是电脑为</description>
+    </item>
     
     <item>
       <title>Web小知识</title>
