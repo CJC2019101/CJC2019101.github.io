@@ -6,10 +6,19 @@
     <description>Recent content in Posts on 阿飞</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 17 Mar 2020 21:03:31 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 12 Apr 2020 22:23:43 +0800</lastBuildDate>
     
 	<atom:link href="https://CJC2019101.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>BigInterger和BigDecimal</title>
+      <link>https://CJC2019101.github.io/post/BigInterger%E5%92%8CBigDecimal/</link>
+      <pubDate>Sun, 12 Apr 2020 22:23:43 +0800</pubDate>
+      
+      <guid>https://CJC2019101.github.io/post/BigInterger%E5%92%8CBigDecimal/</guid>
+      <description>BigInterger 一、简介： BigInteger，大整型数。按字面意思理解就好这是一个超大的整数。 这是Java提供的用于存放超过“long”型的整数。 使用场景：当我们需要记录一个2000位的整数计算时咋办？使用字符串获取2000位的整数，再分割成Integer、Long大小范围内能接受的若干个小</description>
+    </item>
     
     <item>
       <title>Java异常</title>
