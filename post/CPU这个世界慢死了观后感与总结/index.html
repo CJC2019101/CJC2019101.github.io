@@ -6,20 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Collection体系的使用 | 阿飞</title>
-    <meta property="og:title" content="Collection体系的使用 - 阿飞">
+    <title>CPU：这个世界慢死了观后感与总结 | 阿飞</title>
+    <meta property="og:title" content="CPU：这个世界慢死了观后感与总结 - 阿飞">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content='2020-02-16T10:41:39&#43;08:00'>
+    <meta property="article:published_time" content='2020-04-29T16:38:36&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2020-02-16T10:41:39&#43;08:00'>
+    <meta property="article:modified_time" content='2020-04-29T16:38:36&#43;08:00'>
         
     <meta name="Keywords" content="java">
-    <meta name="description" content="Collection体系的使用">
+    <meta name="description" content="CPU：这个世界慢死了观后感与总结">
         
     <meta name="author" content="阿飞">
-    <meta property="og:url" content="https://CJC2019101.github.io/post/Collection%E4%BD%93%E7%B3%BB/">
+    <meta property="og:url" content="https://CJC2019101.github.io/post/CPU%E8%BF%99%E4%B8%AA%E4%B8%96%E7%95%8C%E6%85%A2%E6%AD%BB%E4%BA%86%E8%A7%82%E5%90%8E%E6%84%9F%E4%B8%8E%E6%80%BB%E7%BB%93/">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
@@ -149,10 +149,16 @@
   <ul>
     <li>
       <ul>
-        <li><a href="#collection">Collection</a></li>
-        <li><a href="#1list">1.List</a></li>
-        <li><a href="#2set">2.Set</a></li>
-        <li><a href="#3map">3.Map</a></li>
+        <li><a href="#前记">前记</a></li>
+      </ul>
+    </li>
+    <li><a href="#问题">问题</a>
+      <ul>
+        <li><a href="#一为什么cpu需要多级缓存">一、为什么CPU需要多级缓存</a></li>
+        <li><a href="#二cpu的上下文切换为何耗时">二、CPU的上下文切换为何耗时</a></li>
+        <li><a href="#三多线程的并发加锁解锁">三、多线程的并发、加锁、解锁</a></li>
+        <li><a href="#四io操作的耗时">四、IO操作的耗时</a></li>
+        <li><a href="#五参考文章">五、参考文章</a></li>
       </ul>
     </li>
   </ul>
@@ -188,10 +194,10 @@
 </script>
     <article class="post">
         <header>
-            <h1 class="post-title">Collection体系的使用</h1>
+            <h1 class="post-title">CPU：这个世界慢死了观后感与总结</h1>
         </header>
         <date class="post-meta meta-date">
-            2020年2月16日
+            2020年4月29日
         </date>
         
         
@@ -202,79 +208,81 @@
         
         
         <div class="post-content">
-            <h3 id="collection">Collection</h3>
-<p>Collection是Java所有集合类的父类。 常见的有：List、Set、Map、Tree。</p>
+            <h3 id="前记">前记</h3>
+<blockquote>
+<p>昨天的游戏脚本项目因为没注意IO流的读取操作（仅仅只是Dbug（）打印了两句话）导致运行卡顿，才引发了这篇博客的编写。体会“性能优化”的重要性。   <a href="https://blog.51cto.com/13188467/2065321">CPU：这个世界慢死了</a></p>
+</blockquote>
+<h2 id="问题">问题</h2>
+<h3 id="一为什么cpu需要多级缓存">一、为什么CPU需要多级缓存</h3>
 <ul>
-<li>常用方法：<br>
- retailAll(Collection<!-- raw HTML omitted --> t); 取两个集合的交集。<br>
- contains(T t); 是否包含某个值。</li>
-<li>对应的工具类：Collections<br>
- 常用方法：<br>
-  1. csort(Collection<!-- raw HTML omitted --> t); 对实现了Comparable接口的集合元素排序，默认是升序。<br>
-  2. reverse(Collection<!-- raw HTML omitted --> t); 对集合逆序排列。如：915689 &mdash;&gt; 986519
-  hashCode(Object o); 此方法是继承与Object类的可以重写，也可以通过工具类调用。</li>
-</ul>
-<h3 id="1list">1.List</h3>
+<li>CPU缓存分类：<br>
+ 1级缓存，2级缓存，3级缓存。数字越小读取速度越快而且每个等级的缓存效率都是80%，就是说：“1L缓存能有效存储80%的CPU执行指令过程产生的中间变量数据，剩下的20%由2L存储。2L缓存的存储效率也是80%也就是总量的16%，以此类推给3L缓存就是总量的3.2%，剩下的0.8%就是存放在内存中。”</li>
+<li>CPU缓存命中失败：<br>
+ 指CPU在当前的缓存中没有找到需要的数据，与之对应的是CPU缓存命中成功。
 <ul>
-<li>常见的有：ArrayList、HashList、LinkedList。</li>
-<li>常用方法：
-Collection的方法ArrayList也有。</li>
-<li>对应的工具类： Lists<br>
- 这个需要额外的导包：Guava。</li>
+<li>缓存查找顺序：<br>
+ 1级缓存、2级缓存、3级缓存、内存。 当所有缓存区都没有找到，“应该”是抛异常或者debug的提示信息（这个我不知道）。</li>
+<li>总结：<br>
+ 提高程序代码运行速度缓存的读取速度是远远高于内存的。</li>
 </ul>
-<h4 id="arraylist">ArrayList</h4>
+</li>
+</ul>
+<h3 id="二cpu的上下文切换为何耗时">二、CPU的上下文切换为何耗时</h3>
 <ul>
-<li>常用方法：<br>
- new ArrayList(Collection<!-- raw HTML omitted --> t); 可以将Collection的子类直接转换为List集合。</li>
-<li>ArrayList的动态扩容：<br>
- ArrayList的底层其实是数组，如果当我们添加的元素超出原有的底层数组长度时，他会重新创建一个是原来数组长度1.5倍的数组。并通过Arrays.copyOf()方法复制原来数组的数据。</li>
+<li>CPU上下文：
+<ol>
+<li>CPU寄存器：<br>
+ 存放CPU指定执行过程中产生的中间变量数据。</li>
+<li>程序计数器：<br>
+ 记录当前执行的指令以及下一个将要执行的指令，是一个指令序列。</li>
+<li>进程：<br>
+ 指令执行的基本单位，拥有自己的地址空间可以存储少量数据。</li>
+<li>线程：<br>
+ 指令执行的最小单位属于进程的一部分，只拥有一份必不可少的资源其他资源数据是在进程中共享的。</li>
+</ol>
+</li>
+<li>CPU上下文的切换：<br>
+ 指当前正在执行的进程或线程状态由运行状态变为阻塞状态，另外一个进程或线程由阻塞状态变为运行状态。 CPU的上下文切换也是很消耗时间的，这个过程需要准备非常多的工作，期间CPU寄存器存储进程或线程中的数据（<!-- raw HTML omitted --> CPU缓存（1L，2L，3L）中保存的CPU执行指令过程中产生的中间变量数据。<!-- raw HTML omitted -->），变为阻塞状态的的进程或是线程放入“程序计数器（指令序列）”中等待下次CPU的调度，“程序计数器”告诉CPU下一条将要执行的指令位置。
+ <img src="https://s1.ax1x.com/2020/04/29/J7J3bn.jpg" alt="J7J3bn.jpg"></li>
 </ul>
-<h3 id="2set">2.Set</h3>
+<h3 id="三多线程的并发加锁解锁">三、多线程的并发、加锁、解锁</h3>
 <ul>
-<li>特性：无序、元素唯一。</li>
-<li>常见的有：HashSet、LinkedHashSet</li>
-<li>常用方法：<br>
- Collection的方法HashSet也有。</li>
-<li>对应的工具类： Sets
- 这个需要额外的导包：Guava。</li>
+<li>知识拓展：<br>
+ 一个CPU（core：核）只支持运行一个进程，我们感觉快有时候并不是因为多线程的原因而是CPU太快了。</li>
+<li>多线程：<br>
+ 多线程的并发肯定逃不了线程的切换。上面“CPU的上下文切换”已经说明了他的耗时就不复诉了。</li>
+<li>线程的死锁：<br>
+ 由于线程是共享进程的资源很有可能发生线程的死锁。就是我需要你的资源，你需要我的数据。谁都不肯先交出自己的资源数据形成死循环一直等待所需资源的释放。</li>
+<li>线程的终止：<br>
+ 线程的终止对程序也是会产生影响的。</li>
 </ul>
-<h4 id="hashset">HashSet</h4>
-<p> 1. 元素唯一：<br>
-  HashSet元素唯一并不是我们每插入一个元素就调用方法contains(Object o)，这样效率太低下。他是通过Objects.hashCode()方法将元素们分类如下图。这样在hashCode值相同的列中去找可以有效的提高效率。<br>
-<a href="https://imgchr.com/i/3p7wPH"><img src="https://s2.ax1x.com/2020/02/16/3p7wPH.png" alt="3p7wPH.png"></a>
- 2. 常用方法：<br>
-  new HashSet(Collection<!-- raw HTML omitted --> t); 可以将Collection的子类直接转换为Set集合，且去掉Collection集合中重复的元素只保留一个。<br>
- 通过查看源码发现HashSet本质就是HashMap的‘key’,他们的Iterator(迭代器)是同一个。<br>
-  如图：<br>
-<a href="https://imgchr.com/i/3p7NVO"><img src="https://s2.ax1x.com/2020/02/16/3p7NVO.png" alt="3p7NVO.png"></a><br>
-<a href="https://imgchr.com/i/3p7aIe"><img src="https://s2.ax1x.com/2020/02/16/3p7aIe.png" alt="3p7aIe.png"></a><br>
-<!-- raw HTML omitted --> 因此这里需要额外的注意，如果通过的Map.keySet();获取的set集合，如果改变Map的key也会跟着改变。 Map.values()方法返回Map的值集合，以Collection<!-- raw HTML omitted --> 的形式返回，他的Iterator也是和Map Value的Iterator相同，如果添加或删除也是会直接影响Map的值 <!-- raw HTML omitted --> <br>
-  如图：<br>
-<a href="https://imgchr.com/i/3p7YqK"><img src="https://s2.ax1x.com/2020/02/16/3p7YqK.png" alt="3p7YqK.png"></a><br>
- 3. Iterator扩展：<br>
-  当一个集合（Map、Collection）创建成功并赋值，Iterator（迭代器）就和值绑定了。因此我们需要改变集合中的某个数据底层都是通过Iterator改变的。虽然List集合可以通过“for循环”遍历，但是绝对不能通过“for循环遍历”改变、删除集合中的某个值。ConcurrentModificationException（并发修改异常）。</p>
-<h4 id="linkedhashset">LinkedHashSet</h4>
-<p> 1. 特性：<br>
-  * 他是有序的。是按插入时的顺序排序。<br>
-  * 元素唯一。<br>
- 2. 常用方法：<br>
-  new LinkedHashSet(Collection<!-- raw HTML omitted --> t); 可以将Collection的子类直接转换为linkedHashSet集合，且去掉Collection集合中的重复的元素只保留一个。</p>
-<h4 id="treeset">TreeSet</h4>
-<p> 1. 特性：有序，默认是升序排序。<br>
- 2. 常用方法：<br>
-  new TreeSet(Collection<!-- raw HTML omitted --> t); 可以将Collection的子类直接转换为TreeSet集合，且默认的就会排序。 要求元素实现Comparable接口才能实现排序。<br>
- 3. TreeSet 本质上也是TreeMap。<br>
-<a href="https://imgchr.com/i/3p70Gd"><img src="https://s2.ax1x.com/2020/02/16/3p70Gd.png" alt="3p70Gd.png"></a></p>
-<h3 id="3map">3.Map</h3>
-<p> 1. 特性：使用的键值对的方式存储数据。 key不能重复value可以。<br>
- 2. 常见的有：Properties、HashMap&hellip;.。
- 常用方法：<br>
-  * keySet(); 返回Map集合的key以Set集合的形式返回map的key。<br>
-  * values(); 返回Map集合的值以Collection的形式返回map的value。<br>
-<!-- raw HTML omitted -->  如果修改keySet()、values()方法的返回值会直接影响HasdMap集合的数据。因为他们的Iterator和Map的Iterator是同一个。<!-- raw HTML omitted --><br>
- 源码分析：<br>
-  <a href="https://imgchr.com/i/3p7GKx"><img src="https://s2.ax1x.com/2020/02/16/3p7GKx.png" alt="3p7GKx.png"></a>
-  <a href="https://imgchr.com/i/3p7UaD"><img src="https://s2.ax1x.com/2020/02/16/3p7UaD.png" alt="3p7UaD.png"></a></p>
+<h3 id="四io操作的耗时">四、IO操作的耗时</h3>
+<ul>
+<li>
+<p>定义：<br>
+ 所谓的IO操作是站在内存的角度来看的，他指的是对外存的IO也就是读取或写入硬盘中的数据。</p>
+</li>
+<li>
+<p>耗时的原因：<br>
+ 我们应该有个常识存储器容量越大速度越慢而我们的IO操作是针对磁盘或硬盘中的数据IO。具体有多慢请看 <a href="https://blog.51cto.com/13188467/2065321">CPU：这个世界慢死了</a>。 所以我们编写程序的时候要尽量减少IO操作！！！</p>
+</li>
+<li>
+<p>原文片段：<br>
+ SSD固态硬盘IO读取1MB的数据需要1ms换成人类时间就是一个月。机械硬盘就更慢了。</p>
+</li>
+<li>
+<p>Redis等高速缓存系统崛起的原因：<br>
+ 减少IO操作的使用。</p>
+</li>
+</ul>
+<h3 id="五参考文章">五、参考文章</h3>
+<ol>
+<li><a href="https://blog.csdn.net/moutain0101/article/details/79643970">https://blog.csdn.net/moutain0101/article/details/79643970</a></li>
+<li><a href="https://blog.csdn.net/zhh1072773034/article/details/74240897">https://blog.csdn.net/zhh1072773034/article/details/74240897</a></li>
+<li><a href="https://www.cnblogs.com/wangchaowei/p/8472565.html">https://www.cnblogs.com/wangchaowei/p/8472565.html</a></li>
+<li><a href="https://www.b2b101.com/databank/63244654.html">https://www.b2b101.com/databank/63244654.html</a></li>
+<li><a href="https://blog.51cto.com/13188467/2065321">https://blog.51cto.com/13188467/2065321</a></li>
+</ol>
 <h4 id="font-colorff0000如有错误的地方还望各位网友指出改正font"><!-- raw HTML omitted -->如有错误的地方还望各位网友指出改正。<!-- raw HTML omitted --></h4>
 
         </div>
@@ -283,7 +291,7 @@ Collection的方法ArrayList也有。</li>
 <div class="post-archive">
     <ul class="post-copyright">
         <li><strong>原文作者：</strong><a rel="author" href="https://CJC2019101.github.io/">阿飞</a></li>
-        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://CJC2019101.github.io/post/Collection%E4%BD%93%E7%B3%BB/">https://CJC2019101.github.io/post/Collection%E4%BD%93%E7%B3%BB/</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://CJC2019101.github.io/post/CPU%E8%BF%99%E4%B8%AA%E4%B8%96%E7%95%8C%E6%85%A2%E6%AD%BB%E4%BA%86%E8%A7%82%E5%90%8E%E6%84%9F%E4%B8%8E%E6%80%BB%E7%BB%93/">https://CJC2019101.github.io/post/CPU%E8%BF%99%E4%B8%AA%E4%B8%96%E7%95%8C%E6%85%A2%E6%AD%BB%E4%BA%86%E8%A7%82%E5%90%8E%E6%84%9F%E4%B8%8E%E6%80%BB%E7%BB%93/</a></li>
         <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
     </ul>
 </div>
@@ -297,15 +305,15 @@ Collection的方法ArrayList也有。</li>
     <h2>See Also</h2>
     <ul class="listing">
         
-        <li><a href="/post/Maven/">Maven</a></li>
+        <li><a href="/post/BigInterger%E5%92%8CBigDecimal/">BigInterger和BigDecimal</a></li>
         
-        <li><a href="/post/%E4%BD%BF%E7%94%A8postman%E8%BF%9B%E8%A1%8C%E7%99%BB%E5%BD%95%E6%B5%8B%E8%AF%95/">使用postman进行登录测试</a></li>
+        <li><a href="/post/Java%E5%BC%82%E5%B8%B8/">Java异常</a></li>
         
-        <li><a href="/post/20200202/">20200202</a></li>
+        <li><a href="/post/Java%E7%9A%84IO/">Java的IO</a></li>
         
-        <li><a href="/post/github%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">Github常用命令</a></li>
+        <li><a href="/post/web%E5%B0%8F%E7%9F%A5%E8%AF%86/">Web小知识</a></li>
         
-        <li><a href="/archives/"></a></li>
+        <li><a href="/post/Cmder%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/">Cmder的安装与配置</a></li>
         
     </ul>
 </div>
