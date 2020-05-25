@@ -6,20 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Java异常 | 阿飞</title>
-    <meta property="og:title" content="Java异常 - 阿飞">
+    <title>Lucene简介与数据库索引 | 阿飞</title>
+    <meta property="og:title" content="Lucene简介与数据库索引 - 阿飞">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content='2020-03-17T21:03:31&#43;08:00'>
+    <meta property="article:published_time" content='2020-05-21T20:47:40&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2020-03-17T21:03:31&#43;08:00'>
+    <meta property="article:modified_time" content='2020-05-21T20:47:40&#43;08:00'>
         
     <meta name="Keywords" content="java">
-    <meta name="description" content="Java异常">
+    <meta name="description" content="Lucene简介与数据库索引">
         
     <meta name="author" content="阿飞">
-    <meta property="og:url" content="https://CJC2019101.github.io/post/Java%E5%BC%82%E5%B8%B8/">
+    <meta property="og:url" content="https://CJC2019101.github.io/post/Lucene%E7%AE%80%E4%BB%8B%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B4%A2%E5%BC%95/">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
@@ -147,11 +147,17 @@
     <div class="post-toc-content">
         <nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#一简介">一、简介</a></li>
+    <li><a href="#二lucene底层">二、Lucene底层</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#一简介-1">一、简介</a></li>
+    <li><a href="#二数据库索引结构b树">二、数据库索引结构：B+树</a></li>
+    <li><a href="#三sql查询优化器">三、SQL查询优化器</a></li>
+    <li><a href="#二数据库索引的使用">二、数据库索引的使用</a>
       <ul>
-        <li><a href="#java的异常体系">Java的异常体系</a></li>
-        <li><a href="#异常的处理">异常的处理</a></li>
-        <li><a href="#异常的检查">异常的检查</a></li>
+        <li><a href="#font-color--red上述如有错误的地方还望各位网友指出改正谢谢观看font">上述如有错误的地方还望各位网友指出改正，谢谢观看。</a></li>
       </ul>
     </li>
   </ul>
@@ -187,10 +193,10 @@
 </script>
     <article class="post">
         <header>
-            <h1 class="post-title">Java异常</h1>
+            <h1 class="post-title">Lucene简介与数据库索引</h1>
         </header>
         <date class="post-meta meta-date">
-            2020年3月17日
+            2020年5月21日
         </date>
         
         
@@ -201,110 +207,128 @@
         
         
         <div class="post-content">
-            <h3 id="java的异常体系">Java的异常体系</h3>
-<p>Throwable是所有Java异常的父类，只能 throw、throws Throwable的子类，及其自己。</p>
+            <h1 id="lucence">Lucence</h1>
+<hr>
+<p> 每个技术都会有他存在的原因：解决实际生活中的问题和需求。<strong>个人认为</strong>Lucene（全文检索引擎工具包）就是迎合了互联网的发展解决在大量数据中准确的查询问题，关键词的划分、关键词出现的次数、包含关键词的目标文档排序等等。</p>
+<hr>
+<h2 id="一简介">一、简介</h2>
+<p> Lucene是全文检索引擎工具包，他是slor、ElasticSearch的底层，他们各有各的优点但是因为分布式的原因ElasticSearch是明显比slor更深程序员的喜爱，万维网、github、StackOverflow都是使用的ElasticSearch做的分布式全文检索。<br>
+ 参考链接：<br>
+  1. <a href="https://georgedage.blog.csdn.net/article/details/103540619">什么是Lucene和Solr和Elasticsearch，它们的区别是什么？</a></p>
+<h2 id="二lucene底层">二、Lucene底层</h2>
+<p> 1.正排索引<br>
+  文档ID 对应 关键词位置、出现次数。<br>
+ 2.倒排索引<br>
+  关键词位置、出现次数 对应 文档ID。<br>
+ Lucene底层使用的倒排索引，从上面的名词解释不难看出Lucene为什么使用倒排索引？各位可以想想我们在实际场景中使用浏览器搜索肯定是根据“关键词”去搜索出相关文档的，这刚好对应“倒排索引”根据关键词位置、出现次数 对应 文档ID。<br>
+ 参考链接：<a href="https://www.cnblogs.com/yuluoxingkong/p/12689963.html">什么是倒排索引</a>，</p>
+<h1 id="数据库索引">数据库索引</h1>
+<hr>
+<p> 因个人能力有限以下内容全是自己参考别人的博客拿自己的语言写出来了，其中还是有很多内容是雷同的。博客内容正确性对待确认，本篇作者也还没有实际操作正是因为没有用过数据库索引优化SQL查询所以才有的此篇博客，后续我会上机操作确认其中索引的使用再做修改。此篇博客仅仅是针对自己受益较深、基础理论的介绍如果想深入了解的请查看下面的连接。</p>
+<hr>
+<h2 id="一简介-1">一、简介</h2>
+<p> 数据库索引是对于数据库表中的某一列或多列数据而言的,优化了数据库的查询。如果数据库数据量较少不推荐使用索引，因为创建索引也会有一定的开销。<br>
+ 1. 分类</p>
 <ul>
-<li>分类：<br>
- 1. “checkedException”异常： 受检异常，要么在“方法签名上”抛出异常，要么在方法内部“捕获-处理”异常。 <!-- raw HTML omitted -->可预料异常，知道可能要发生。<!-- raw HTML omitted -->。<br>
- 2. “uncheckedException”异常：非受检异常，方法内部“捕获-处理”时抛出非受检异常，不要求在“方法签名上”抛出异常。 <!-- raw HTML omitted -->不可预料异常<!-- raw HTML omitted --> 如：RuntimeException&hellip;&hellip;。<br>
-  * checkedException与uncheckedException分类原因：正因为可预料才在“方法签名”上抛出异常准备随时可以处理，也是正因为不可以预料我们不能在调用的每个方法上都throws uncheckedException异常太过冗余。<br>
- 1. Exception：可恢复异常。<br>
- 2. Error：不可恢复异常。<br>
-如图：
-<img src="https://s1.ax1x.com/2020/03/18/8dvF76.png" alt="8dvF76.png"></li>
+<li>非聚合索引：以数据库表非主键key列作为的索引，B+树叶子节点存储索引列对应行的主键key。</li>
+<li>聚合索引：以数据库表主键key列作为的索引，B+树叶子节点存储索引列对应行的所有数据。</li>
+<li>联合索引：以数据库表多列作为的索引。</li>
 </ul>
-<h3 id="异常的处理">异常的处理</h3>
-<h4 id="一处理原则">一、处理原则</h4>
+<p> 2. 数据库索引：索引列中每一行就是一个索引值，而数据库索引就是指向索引列中每一行的索引值的指针，因此B+树中节点所有值都是通过I/O操作读取的数据。</p>
+<h2 id="二数据库索引结构b树">二、数据库索引结构：B+树</h2>
+<p> 数据库索引数据存储在计算机硬盘的索引文件中，当我们进行“索引查询时”会进行I/O操作读取索引文件数据“生成B+树结构”加载到内存，如果索引数量多引发的I/O操作量也是巨大的。创建索引需要额外开销、索引查询I/O操作并没有减少多少、同一个表创建过多索引，各个索引间的耦合度太高反而得不偿失, 因此数据量少的数据库不推荐使用索引查询。</p>
 <ol>
-<li>越早处理越好，越放到后面越复杂。</li>
-<li>异常准确带有详细信息。 尽量不要使用“Exception”、“Throwable”等去捕获接收异常。不怕有异常，就怕信息不准确。</li>
-<li>尽量不要忽略异常。如下：catch &lsquo;｛｝&lsquo;内什么都没有，如果实在没法请命名为‘ignored’表明这是一个被忽略的异常。</li>
+<li>特性<br>
+（1） 根节点和中间节点只存放索引值：<br>
+ 节省了节点存储空间(不使用数据库索引查询为一行一行的I/O读取表数据，而索引只是一行中的一列或几列数据。)存储更多索引键降低B+树高度、减少I/O操作（数据库表中数据存储在计算机硬盘中）、根据索引查询从根节点开始判断比较一直查到叶子节点时减少了表和表之间数据量的参与，即笛卡尔集的大小。<br>
+（2） 叶子节点存放数据库表中数据：<br>
+ 不同类别的索引叶子节点存储数据的方式不同。非聚合索引叶子节点存索引列对应表各行的主键key值，聚合索引叶子节点存索引列对应表各行的所有数据。 <br>
+（3） 叶子节点之间为有序链表结构：<br>
+ 当索引查询遍历到叶子节点没有查询到指定数据时不返回根节点重新遍历查询，而是依靠叶子节点之间是有序链表直接往下一个叶子节点去比较，如图2-1B+树所示。</li>
 </ol>
+<p>         图2-1B+树结构
+<a href="https://imgchr.com/i/YvHeln"><img src="https://s1.ax1x.com/2020/05/23/YvHeln.png" alt="YvHeln.png"></a>
+         图2-2百度百科B+树结构
+<a href="https://imgchr.com/i/YvHCef"><img src="https://s1.ax1x.com/2020/05/23/YvHCef.png" alt="YvHCef.png"></a>
+ 参考链接： <a href="https://blog.csdn.net/u013007900/article/details/78978271">B+数图文详解</a><br>
+2. 数据库索引的优化<br>
+ 因为“聚集索引”B+树叶子节点存放索引列对应表各个行的所有值，所以修改表数据会还要更新索引B+树叶子节点中的数据。而“非聚集索引”B+树叶子节点存放索引列对应表各个行的主键key值对于经常更新表比较友好。但是如果同一个表创建过多的数据库索引不会带来优化反而会成为累赘，如果一个表既创建“聚集索引”又创建“非聚集索引”无论如何都不可能使两个索引高校使用。<br>
+| 动作描述          |   聚集索引 |   非聚集索引|<br>
+|     :&mdash;&mdash;&ndash;:     |   :&mdash;&ndash;:  |   :&mdash;-: |<br>
+| 列经常被分组排序      |   使用   |   使用   |<br>
+| 返回某范围内的数据     |   使用   |   不使用  |<br>
+| 一个或极少不同的值     |   不使用  |   不使用  |<br>
+| 小数目的不同值       |   使用   |   不使用  |<br>
+| 频繁更新的列        |   不使用  |   使用   |<br>
+| 外键列           |   使用   |   使用   |<br>
+| 主键列           |   使用   |   使用   |<br>
+ 参考链接：<a href="https://www.csdn.net/gather_2a/MtTaIgxsMzA4Ny1ibG9n.html">mysql索引总结&mdash;-mysql 索引类型以及创建</a></p>
+<h2 id="三sql查询优化器">三、SQL查询优化器</h2>
+<ol>
+<li>数据库的查询过程<br>
+ SQL语言是一种编译语言需要经过编译器后才能执行，但是与C、C++不同的是SQL语言是非过程化语言，即操作用户只需要指定查询条件而不用关心查询过程，SQL查询优化器会根据“查询优化策略”创建多条执行方案并选择其中的最优方案编译执行（非过程化语言的体现）。<br>
+ 详情的查询优化策略实现请查看此链接：<a href="https://blog.csdn.net/u013007900/article/details/78978271">查询优化器（一）</a>、<a href="https://blog.csdn.net/u013007900/article/details/78993101">查询优化器（二）</a><br>
+ 参考链接：<a href="https://blog.csdn.net/u013007900/article/details/78015124">浅谈数据库查询过程</a></li>
+</ol>
+<h2 id="二数据库索引的使用">二、数据库索引的使用</h2>
+<ol>
+<li>索引的创建与删除</li>
+</ol>
+<ul>
+<li>创建索引：</li>
+</ul>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#000;font-weight:bold">try</span><span style="color:#000;font-weight:bold">{</span>
-        InputStream in <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">new</span> FileInputStream<span style="color:#000;font-weight:bold">(</span><span style="color:#000;font-weight:bold">new</span> File<span style="color:#000;font-weight:bold">(</span><span style="color:#d14">&#34;text.txt&#34;</span><span style="color:#000;font-weight:bold">)</span><span style="color:#000;font-weight:bold">)</span>
-    <span style="color:#000;font-weight:bold">}</span><span style="color:#000;font-weight:bold">catch</span><span style="color:#000;font-weight:bold">(</span>FileNotFoundException ignored<span style="color:#000;font-weight:bold">)</span><span style="color:#000;font-weight:bold">{</span> <span style="color:#998;font-style:italic">//异常类型准确，不要上来就拿Throwabe、Exception去接收捕获的异常
-</span><span style="color:#998;font-style:italic"></span>        <span style="color:#998;font-style:italic">// TO DO: dosen&#39;t handle Exception
-</span><span style="color:#998;font-style:italic"></span>    <span style="color:#000;font-weight:bold">}</span>
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#000;font-weight:bold">create</span> <span style="color:#000;font-weight:bold">index</span> userIndex <span style="color:#000;font-weight:bold">on</span> <span style="color:#d14">&#34;</span><span style="color:#d14">user(idcard,name,age)</span><span style="color:#d14">&#34;</span>;
 </code></pre></td></tr></table>
 </div>
 </div><ul>
-<li>try-with-resources的使用：<br>
- try-catch、try-finally就不多说了。try-with-source是JDK7之后出现的捕获处理异常后关闭资源的方式。简单的说就是“try-finally”的简写<br>
- <strong>使用前提</strong>：抛出异常的类必须实现AutoCloseable接口可以自动关闭。<br>
- <strong>注意</strong>：try-with-source并没有处理异常，处理异常的方法还是得放在catch&rsquo;{}&lsquo;中。</li>
+<li>删除索引：</li>
 </ul>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#000;font-weight:bold">try</span><span style="color:#000;font-weight:bold">(</span>InputStream in <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">new</span> FileInputStream<span style="color:#000;font-weight:bold">(</span><span style="color:#000;font-weight:bold">new</span> File<span style="color:#000;font-weight:bold">(</span><span style="color:#d14">&#34;text.txt&#34;</span><span style="color:#000;font-weight:bold">)</span><span style="color:#000;font-weight:bold">)</span><span style="color:#000;font-weight:bold">)</span><span style="color:#000;font-weight:bold">{</span>
-        <span style="color:#998;font-style:italic">// TO DO: 业务逻辑代码
-</span><span style="color:#998;font-style:italic"></span>    <span style="color:#000;font-weight:bold">}</span><span style="color:#000;font-weight:bold">catch</span><span style="color:#000;font-weight:bold">(</span>IOException e<span style="color:#000;font-weight:bold">)</span><span style="color:#000;font-weight:bold">{</span>
-        <span style="color:#998;font-style:italic">// TO DO: handle Exception
-</span><span style="color:#998;font-style:italic"></span>        e<span style="color:#000;font-weight:bold">.</span><span style="color:#008080">printStackTrace</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000;font-weight:bold">)</span><span style="color:#000;font-weight:bold">;</span> <span style="color:#998;font-style:italic">// 极力不推荐，可以能导致该方法返回错误的结果。原因是处理异常后又程序继续往后运行。
-</span><span style="color:#998;font-style:italic"></span>        <span style="color:#000;font-weight:bold">throw</span> <span style="color:#000;font-weight:bold">new</span> RuntimeException<span style="color:#000;font-weight:bold">(</span><span style="color:#d14">&#34;参数错误或文件打开异常&#34;</span><span style="color:#000;font-weight:bold">)</span><span style="color:#000;font-weight:bold">;</span> <span style="color:#998;font-style:italic">// 正确处理异常
-</span><span style="color:#998;font-style:italic"></span>    <span style="color:#000;font-weight:bold">}</span>
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#000;font-weight:bold">alter</span> <span style="color:#000;font-weight:bold">table</span> <span style="color:#d14">&#34;</span><span style="color:#d14">表名</span><span style="color:#d14">&#34;</span> <span style="color:#000;font-weight:bold">drop</span> <span style="color:#000;font-weight:bold">index</span> <span style="color:#d14">&#34;</span><span style="color:#d14">索引名</span><span style="color:#d14">&#34;</span>;
 </code></pre></td></tr></table>
 </div>
-</div><p><img src="https://s1.ax1x.com/2020/03/18/8dvi0x.png" alt="8dvi0x.png">
-4. 能使用“if/else”解决就不要抛异常，抛异常的代价很高影响程序效率。 <br>
- 这是一个效率问题，抛异常的代价比“if/else”高。<br>
- 例子：我们使用代码读取一个空文件内容，但要求文件内容不为空，请直接使用“if/else”解决不要动不动就抛异常。</p>
-<h4 id="二异常的抛出原则">二、异常的抛出原则</h4>
-<ol>
-<li>确定方法是否需要处理异常，不需要就抛出。<br>
- 如：通常情况下工具方法不处理异常，调用工具方法的方法处理。</li>
+</div><ol start="2">
+<li>使用条件与规则</li>
 </ol>
-<h4 id="三处理方式">三、处理方式</h4>
-<ol>
-<li>在方法内部throw new Exception()抛出异常，如果是“uncheckedException”不用在“方法签名”上throws 异常，反之“checkedException”就必须在“方法签名”上throws。</li>
-<li>在catch的‘｛｝’打印异常信息。 <!-- raw HTML omitted -->极力不推荐，打印异常信息后程序继续往后运行，该方法可能返回错误的结果<!-- raw HTML omitted --></li>
-<li>try-catch的级联合并，用于多个类型的异常抛出相同的异常信息减少catch的数量。</li>
-</ol>
+<ul>
+<li>最左匹配原则：使用联合索引查询条件必须包含在创建索引时数据库表列中的第一个，即必须包含“idcard”列否则SQL系统将不会使用索引查询，与联合索引列顺序无关SQL系统会自动的将顺序排成：“idcard”、“idcard，name”、“idcard，name，age”。</li>
+<li>!=不走索引查询；</li>
+<li>范围表达式字段（“大于”、“大于等于”&hellip;.）会结束后面的索引查询，即：</li>
+</ul>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">     <span style="color:#000;font-weight:bold">try</span><span style="color:#000;font-weight:bold">(</span>InputStream in <span style="color:#000;font-weight:bold">=</span> <span style="color:#000;font-weight:bold">new</span> FileInputStream<span style="color:#000;font-weight:bold">(</span><span style="color:#000;font-weight:bold">new</span> File<span style="color:#000;font-weight:bold">(</span><span style="color:#d14">&#34;text.txt&#34;</span><span style="color:#000;font-weight:bold">)</span><span style="color:#000;font-weight:bold">)</span><span style="color:#000;font-weight:bold">)</span><span style="color:#000;font-weight:bold">{</span>
-        <span style="color:#998;font-style:italic">// TO DO: 业务逻辑代码
-</span><span style="color:#998;font-style:italic"></span>    <span style="color:#000;font-weight:bold">}</span><span style="color:#000;font-weight:bold">catch</span><span style="color:#000;font-weight:bold">(</span>IllegalArgumentException <span style="color:#000;font-weight:bold">|</span> IOException e<span style="color:#000;font-weight:bold">)</span><span style="color:#000;font-weight:bold">{</span> <span style="color:#998;font-style:italic">// 处理多种类型异常
-</span><span style="color:#998;font-style:italic"></span>        e<span style="color:#000;font-weight:bold">.</span><span style="color:#008080">printStackTrace</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000;font-weight:bold">)</span><span style="color:#000;font-weight:bold">;</span> <span style="color:#998;font-style:italic">// 极力不推荐，可以能导致该方法返回错误的结果。原因是处理异常后又程序继续往后运行。
-</span><span style="color:#998;font-style:italic"></span>        <span style="color:#000;font-weight:bold">throw</span> <span style="color:#000;font-weight:bold">new</span> RuntimeException<span style="color:#000;font-weight:bold">(</span><span style="color:#d14">&#34;参数错误或文件打开异常&#34;</span><span style="color:#000;font-weight:bold">)</span><span style="color:#000;font-weight:bold">;</span> <span style="color:#998;font-style:italic">// 正确处理异常
-</span><span style="color:#998;font-style:italic"></span>    <span style="color:#000;font-weight:bold">}</span>
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">    <span style="color:#000;font-weight:bold">select</span> <span style="color:#000;font-weight:bold">*</span> <span style="color:#000;font-weight:bold">from</span> users <span style="color:#000;font-weight:bold">where</span> idcard <span style="color:#000;font-weight:bold">&gt;</span><span style="color:#d14">&#39;</span><span style="color:#d14">XXXX</span><span style="color:#d14">&#39;</span> <span style="color:#000;font-weight:bold">and</span> age <span style="color:#000;font-weight:bold">=</span><span style="color:#099">10</span>; <span style="color:#000;font-weight:bold">/</span><span style="color:#000;font-weight:bold">/</span> <span style="color:#a61717;background-color:#e3d2d2">只</span><span style="color:#a61717;background-color:#e3d2d2">会</span><span style="color:#a61717;background-color:#e3d2d2">将</span>idcard索引查询<span style="color:#a61717;background-color:#e3d2d2">。</span>  
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="异常的检查">异常的检查</h3>
-<ol>
-<li>方法栈的栈顶要么是异常的发生处，要么是“try-catch”捕获异常后处理抛出的异常信息。<br>
- 一旦某个方法throw抛出了异常，会击穿Java方法栈所有的栈针，程序直接停止运行。在此异常的出现也成了程序结束的入口。</li>
-<li><strong>Cause By</strong>：造成原因,异常打印的详细信息。Java打印信息最底部的Cause By就是异常的发生处。 <br>
- 出现Cause By原因：异常信息被处理方法一层一层的封装。</li>
-</ol>
-<p>如图：
-<img src="https://s1.ax1x.com/2020/03/18/8dvEtO.png" alt="8dvEtO.png"></p>
-<h4 id="font-color--red上面如有错误还望各位网友指出改正谢谢观看font"><!-- raw HTML omitted -->上面如有错误还望各位网友指出改正谢谢观看<!-- raw HTML omitted --></h4>
+</div><ul>
+<li>‘%’在前的不走索引如下代码；</li>
+</ul>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">    <span style="color:#000;font-weight:bold">select</span> <span style="color:#000;font-weight:bold">*</span> <span style="color:#000;font-weight:bold">from</span> <span style="color:#000;font-weight:bold">user</span> <span style="color:#000;font-weight:bold">where</span> name <span style="color:#000;font-weight:bold">like</span> <span style="color:#d14">&#39;</span><span style="color:#d14">%明</span><span style="color:#d14">&#39;</span>;  
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>聚合索引和联合索引同时出现在SQL语句中有SQL查询优化器决定查询策略，非聚合索引和联合索引同上。</li>
+<li>数据库索引不会将带有NULL值的列加入索引中，如果索引列中有NULL值会使索引无效。</li>
+</ul>
+<p> 参考链接：<a href="https://www.cnblogs.com/wwxzdl/p/11116446.html">什么是数据库索引</a>，<a href="https://blog.csdn.net/Abysscarry/article/details/80792876">多个单列索引和联合索引的区别详解</a></p>
+<h3 id="font-color--red上述如有错误的地方还望各位网友指出改正谢谢观看font"><!-- raw HTML omitted -->上述如有错误的地方还望各位网友指出改正，谢谢观看。<!-- raw HTML omitted --></h3>
 
         </div>
 
@@ -312,7 +336,7 @@
 <div class="post-archive">
     <ul class="post-copyright">
         <li><strong>原文作者：</strong><a rel="author" href="https://CJC2019101.github.io/">阿飞</a></li>
-        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://CJC2019101.github.io/post/Java%E5%BC%82%E5%B8%B8/">https://CJC2019101.github.io/post/Java%E5%BC%82%E5%B8%B8/</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://CJC2019101.github.io/post/Lucene%E7%AE%80%E4%BB%8B%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B4%A2%E5%BC%95/">https://CJC2019101.github.io/post/Lucene%E7%AE%80%E4%BB%8B%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B4%A2%E5%BC%95/</a></li>
         <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
     </ul>
 </div>
@@ -326,15 +350,15 @@
     <h2>See Also</h2>
     <ul class="listing">
         
+        <li><a href="/post/CPU%E8%BF%99%E4%B8%AA%E4%B8%96%E7%95%8C%E6%85%A2%E6%AD%BB%E4%BA%86%E8%A7%82%E5%90%8E%E6%84%9F%E4%B8%8E%E6%80%BB%E7%BB%93/">CPU：这个世界慢死了观后感与总结</a></li>
+        
+        <li><a href="/post/BigInterger%E5%92%8CBigDecimal/">BigInterger和BigDecimal</a></li>
+        
+        <li><a href="/post/Java%E5%BC%82%E5%B8%B8/">Java异常</a></li>
+        
         <li><a href="/post/Java%E7%9A%84IO/">Java的IO</a></li>
         
         <li><a href="/post/web%E5%B0%8F%E7%9F%A5%E8%AF%86/">Web小知识</a></li>
-        
-        <li><a href="/post/Cmder%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/">Cmder的安装与配置</a></li>
-        
-        <li><a href="/post/Collection%E4%BD%93%E7%B3%BB/">Collection体系的使用</a></li>
-        
-        <li><a href="/post/Maven/">Maven</a></li>
         
     </ul>
 </div>
