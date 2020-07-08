@@ -81,6 +81,22 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://CJC2019101.github.io/post/%E4%BD%BF%E7%94%A8postman%E8%BF%9B%E8%A1%8C%E7%99%BB%E5%BD%95%E6%B5%8B%E8%AF%95/" title="使用postman进行登录测试">使用postman进行登录测试</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2020年2月3日
+        </date>
+        
+        <div class="post-content">
+            访问登录URL获取jwt 1、 添加环境变量jwt，为了可以访问需要登录的URL我们需要在请求头中存放有效的jwt。 2、 添加如下代码 ：如果成功获取jwt会在控制台打印 “Your test name” pm.test(&quot;Your test name&quot;, function(){ var jsonData = pm.response.json(); console.log(jsonData.jwt) pm.environment.set(&quot;jwt&quot;,jsonData.jwt); }); 3、 获取登录URL，访问登录成功获取jwt。 4、 获取需要登陆才能访问的UR……
+        </div>
+        <p class="readmore"><a href="https://CJC2019101.github.io/post/%E4%BD%BF%E7%94%A8postman%E8%BF%9B%E8%A1%8C%E7%99%BB%E5%BD%95%E6%B5%8B%E8%AF%95/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://CJC2019101.github.io/post/20200202/" title="20200202">20200202</a>
             </h1>
         </header>
@@ -155,6 +171,10 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://CJC2019101.github.io/post/Spring%E7%9A%84IOC%E4%B8%8EAOP/" title="Spring的IOC与AOP">Spring的IOC与AOP</a>
+    </li>
+    
+    <li>
         <a href="https://CJC2019101.github.io/post/Lucene%E7%AE%80%E4%BB%8B%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B4%A2%E5%BC%95/" title="Lucene简介与数据库索引">Lucene简介与数据库索引</a>
     </li>
     
@@ -188,10 +208,6 @@
     
     <li>
         <a href="https://CJC2019101.github.io/post/Maven/" title="Maven">Maven</a>
-    </li>
-    
-    <li>
-        <a href="https://CJC2019101.github.io/post/%E4%BD%BF%E7%94%A8postman%E8%BF%9B%E8%A1%8C%E7%99%BB%E5%BD%95%E6%B5%8B%E8%AF%95/" title="使用postman进行登录测试">使用postman进行登录测试</a>
     </li>
     
 </ul>
