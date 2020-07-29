@@ -6,17 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Lucene简介与数据库索引 | 阿飞</title>
-    <meta property="og:title" content="Lucene简介与数据库索引 - 阿飞">
+    <title> | 阿飞</title>
+    <meta property="og:title" content=" - 阿飞">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content='2020-05-21T20:47:40&#43;08:00'>
-        
-        
-    <meta property="article:modified_time" content='2020-05-21T20:47:40&#43;08:00'>
         
     <meta name="Keywords" content="java">
-    <meta name="description" content="Lucene简介与数据库索引">
+    <meta name="description" content="">
         
     <meta name="author" content="阿飞">
     <meta property="og:url" content="https://CJC2019101.github.io/post/Lucene%E7%AE%80%E4%BB%8B%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B4%A2%E5%BC%95/">
@@ -193,10 +189,10 @@
 </script>
     <article class="post">
         <header>
-            <h1 class="post-title">Lucene简介与数据库索引</h1>
+            <h1 class="post-title"></h1>
         </header>
         <date class="post-meta meta-date">
-            2020年5月21日
+            1年1月1日
         </date>
         
         
@@ -230,11 +226,11 @@
 <p> 数据库索引是对于数据库表中的某一列或多列数据而言的,优化了数据库的查询。如果数据库数据量较少不推荐使用索引，因为创建索引也会有一定的开销。<br>
  1. 分类</p>
 <ul>
-<li>非聚合索引：以数据库表非主键key列作为的索引，B+树叶子节点存储索引列对应行的主键key。</li>
+<li>非聚合索引：以数据库表非主键key列作为的索引，则B+树节点存储索引列对应行的主键key。</li>
 <li>聚合索引：以数据库表主键key列作为的索引，B+树叶子节点存储索引列对应行的所有数据。</li>
 <li>联合索引：以数据库表多列作为的索引。</li>
 </ul>
-<p> 2. 数据库索引：索引列中每一行就是一个索引值，而数据库索引就是指向索引列中每一行的索引值的指针，因此B+树中节点所有值都是通过I/O操作读取的数据。</p>
+<p> 2. 数据库索引：索引列中每一行就是一个索引值，而数据库索引就是指向 “索引列” 中每行索引值的指针，因此B+树中节点所有值都是通过I/O操作读取的数据。</p>
 <h2 id="二数据库索引结构b树">二、数据库索引结构：B+树</h2>
 <p> 数据库索引数据存储在计算机硬盘的索引文件中，当我们进行“索引查询时”会进行I/O操作读取索引文件数据“生成B+树结构”加载到内存，如果索引数量多引发的I/O操作量也是巨大的。创建索引需要额外开销、索引查询I/O操作并没有减少多少、同一个表创建过多索引，各个索引间的耦合度太高反而得不偿失, 因此数据量少的数据库不推荐使用索引查询。</p>
 <ol>
@@ -247,12 +243,12 @@
  当索引查询遍历到叶子节点没有查询到指定数据时不返回根节点重新遍历查询，而是依靠叶子节点之间是有序链表直接往下一个叶子节点去比较，如图2-1B+树所示。</li>
 </ol>
 <p>         图2-1B+树结构
-<a href="https://imgchr.com/i/YvHeln"><img src="https://s1.ax1x.com/2020/05/23/YvHeln.png" alt="YvHeln.png"></a>
+<img src="https://img-blog.csdnimg.cn/2020052522484454.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDczODMwOA==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">
          图2-2百度百科B+树结构
-<a href="https://imgchr.com/i/YvHCef"><img src="https://s1.ax1x.com/2020/05/23/YvHCef.png" alt="YvHCef.png"></a>
+<img src="https://img-blog.csdnimg.cn/20200525224929866.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDczODMwOA==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">
  参考链接： <a href="https://blog.csdn.net/u013007900/article/details/78978271">B+数图文详解</a><br>
 2. 数据库索引的优化<br>
- 因为“聚集索引”B+树叶子节点存放索引列对应表各个行的所有值，所以修改表数据会还要更新索引B+树叶子节点中的数据。而“非聚集索引”B+树叶子节点存放索引列对应表各个行的主键key值对于经常更新表比较友好。但是如果同一个表创建过多的数据库索引不会带来优化反而会成为累赘，如果一个表既创建“聚集索引”又创建“非聚集索引”无论如何都不可能使两个索引高校使用。<br>
+ 创建索引的本质就是创建额外的文件存储索引数据，查询的时候先去额外索引的文件查找定位数据位置再去原始表中直接查询，无形之中就增加IO次数。
 | 动作描述          |   聚集索引 |   非聚集索引|<br>
 |     :&mdash;&mdash;&ndash;:     |   :&mdash;&ndash;:  |   :&mdash;-: |<br>
 | 列经常被分组排序      |   使用   |   使用   |<br>
@@ -324,8 +320,8 @@
 </code></pre></td></tr></table>
 </div>
 </div><ul>
-<li>聚合索引和联合索引同时出现在SQL语句中有SQL查询优化器决定查询策略，非聚合索引和联合索引同上。</li>
-<li>数据库索引不会将带有NULL值的列加入索引中，如果索引列中有NULL值会使索引无效。</li>
+<li>聚合索引和联合索引同时出现在SQL语句中由<strong>SQL查询优化器决定查询策略</strong>，非聚合索引和联合索引也是如此。</li>
+<li><!-- raw HTML omitted -->数据库索引不会将带有NULL值的列加入索引中，如果索引列中有NULL值会使索引无效<!-- raw HTML omitted -->。</li>
 </ul>
 <p> 参考链接：<a href="https://www.cnblogs.com/wwxzdl/p/11116446.html">什么是数据库索引</a>，<a href="https://blog.csdn.net/Abysscarry/article/details/80792876">多个单列索引和联合索引的区别详解</a></p>
 <h3 id="font-color--red上述如有错误的地方还望各位网友指出改正谢谢观看font"><!-- raw HTML omitted -->上述如有错误的地方还望各位网友指出改正，谢谢观看。<!-- raw HTML omitted --></h3>
@@ -350,15 +346,15 @@
     <h2>See Also</h2>
     <ul class="listing">
         
+        <li><a href="/post/%E5%AD%A6%E4%BC%9A%E6%90%9C%E7%B4%A2%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98/">学会搜索解决问题</a></li>
+        
+        <li><a href="/post/StreamTokenizer%E4%B8%8EBufferedReader%E7%9A%84%E4%BD%BF%E7%94%A8/">StreamTokenizer与BufferedReader的使用</a></li>
+        
+        <li><a href="/post/Spring%E7%9A%84IOC%E4%B8%8EAOP/">Spring的IOC与AOP</a></li>
+        
         <li><a href="/post/CPU%E8%BF%99%E4%B8%AA%E4%B8%96%E7%95%8C%E6%85%A2%E6%AD%BB%E4%BA%86%E8%A7%82%E5%90%8E%E6%84%9F%E4%B8%8E%E6%80%BB%E7%BB%93/">CPU：这个世界慢死了观后感与总结</a></li>
         
         <li><a href="/post/BigInterger%E5%92%8CBigDecimal/">BigInterger和BigDecimal</a></li>
-        
-        <li><a href="/post/Java%E5%BC%82%E5%B8%B8/">Java异常</a></li>
-        
-        <li><a href="/post/Java%E7%9A%84IO/">Java的IO</a></li>
-        
-        <li><a href="/post/web%E5%B0%8F%E7%9F%A5%E8%AF%86/">Web小知识</a></li>
         
     </ul>
 </div>
@@ -423,11 +419,15 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://CJC2019101.github.io/post/Spring%E7%9A%84IOC%E4%B8%8EAOP/" title="Spring的IOC与AOP">Spring的IOC与AOP</a>
+        <a href="https://CJC2019101.github.io/post/%E5%AD%A6%E4%BC%9A%E6%90%9C%E7%B4%A2%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98/" title="学会搜索解决问题">学会搜索解决问题</a>
     </li>
     
     <li>
-        <a href="https://CJC2019101.github.io/post/Lucene%E7%AE%80%E4%BB%8B%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B4%A2%E5%BC%95/" title="Lucene简介与数据库索引">Lucene简介与数据库索引</a>
+        <a href="https://CJC2019101.github.io/post/StreamTokenizer%E4%B8%8EBufferedReader%E7%9A%84%E4%BD%BF%E7%94%A8/" title="StreamTokenizer与BufferedReader的使用">StreamTokenizer与BufferedReader的使用</a>
+    </li>
+    
+    <li>
+        <a href="https://CJC2019101.github.io/post/Spring%E7%9A%84IOC%E4%B8%8EAOP/" title="Spring的IOC与AOP">Spring的IOC与AOP</a>
     </li>
     
     <li>
@@ -456,10 +456,6 @@
     
     <li>
         <a href="https://CJC2019101.github.io/post/Collection%E4%BD%93%E7%B3%BB/" title="Collection体系的使用">Collection体系的使用</a>
-    </li>
-    
-    <li>
-        <a href="https://CJC2019101.github.io/post/Maven/" title="Maven">Maven</a>
     </li>
     
 </ul>
